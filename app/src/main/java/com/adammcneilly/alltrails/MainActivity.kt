@@ -1,4 +1,4 @@
-package template
+package com.adammcneilly.alltrails
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,7 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import template.theme.TemplateTheme
+import com.adammcneilly.alltrails.theme.AllTrailsTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             enableEdgeToEdge()
 
-            TemplateTheme {
+            AllTrailsTheme {
                 Surface(
                     color = MaterialTheme.colorScheme.background,
                 ) {
