@@ -5,5 +5,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "template"
+rootProject.name = "AllTrails Clone"
 include(":app")
