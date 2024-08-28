@@ -64,8 +64,12 @@ private fun TrailList(modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxWidth(),
     ) {
-        items(3) {
-            TrailListItem()
+        items(4) { index ->
+            if (index == 2) {
+                TrailGroupListItem()
+            } else {
+                TrailListItem()
+            }
         }
     }
 }
