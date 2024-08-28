@@ -3,6 +3,7 @@ package com.adammcneilly.alltrails
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,7 +23,6 @@ fun ATContent(modifier: Modifier = Modifier) {
         modifier = modifier,
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier
                 .padding(
                     top = 16.dp,
@@ -37,19 +37,35 @@ fun ATContent(modifier: Modifier = Modifier) {
 
             FilterButtonRow(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
             )
 
-            LazyColumn(
+            TrailList(
                 modifier = Modifier
-                    .fillMaxWidth()
                     .weight(1F),
-            ) {
-                // Will be filled in in the future
-                // With our list content.
-            }
+            )
 
             ATBottomBar()
+        }
+    }
+}
+
+@Composable
+private fun TrailList(modifier: Modifier = Modifier) {
+    LazyColumn(
+        contentPadding = PaddingValues(
+            start = 16.dp,
+            top = 0.dp,
+            end = 16.dp,
+            bottom = 16.dp,
+        ),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = modifier
+            .fillMaxWidth(),
+    ) {
+        items(3) {
+            TrailListItem()
         }
     }
 }
