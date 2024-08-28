@@ -1,16 +1,27 @@
 package com.adammcneilly.alltrails
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Map
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,22 +64,56 @@ fun ATContent(modifier: Modifier = Modifier) {
 
 @Composable
 private fun TrailList(modifier: Modifier = Modifier) {
-    LazyColumn(
-        contentPadding = PaddingValues(
-            start = 16.dp,
-            top = 0.dp,
-            end = 16.dp,
-            bottom = 16.dp,
-        ),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+    Box(
         modifier = modifier
             .fillMaxWidth(),
     ) {
-        items(4) { index ->
-            if (index == 2) {
-                TrailGroupListItem()
-            } else {
-                TrailListItem()
+        val listState = rememberLazyListState()
+        val firstVisibleItemIndex = derivedStateOf {
+            listState.firstVisibleItemScrollOffset
+        }
+
+        LazyColumn(
+            contentPadding = PaddingValues(
+                start = 16.dp,
+                top = 0.dp,
+                end = 16.dp,
+                bottom = 16.dp,
+            ),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            state = listState,
+            modifier = modifier
+                .fillMaxSize(),
+        ) {
+            items(4) { index ->
+                if (index == 2) {
+                    TrailGroupListItem()
+                } else {
+                    TrailListItem()
+                }
+            }
+        }
+
+        ExtendedFloatingActionButton(
+            onClick = {},
+            shape = RoundedCornerShape(50),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.BottomCenter),
+        ) {
+            Icon(
+                imageVector = Icons.Default.Map,
+                contentDescription = null,
+            )
+
+            AnimatedVisibility(
+                visible = firstVisibleItemIndex.value == 0,
+            ) {
+                Text(
+                    text = "Map",
+                    modifier = Modifier
+                        .padding(start = 8.dp),
+                )
             }
         }
     }
