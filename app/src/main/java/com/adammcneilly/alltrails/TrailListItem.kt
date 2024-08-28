@@ -150,7 +150,8 @@ private fun TrailTitle() {
 private fun ImageContainer() {
     Box(
         modifier = Modifier
-            .clip(RoundedCornerShape(32.dp)),
+            .clip(RoundedCornerShape(32.dp))
+            .aspectRatio(1.5F),
     ) {
         TrailImage()
 
@@ -194,9 +195,7 @@ private fun TrailImage() {
         painter = painterResource(id = R.drawable.trail),
         contentDescription = null,
         contentScale = ContentScale.Crop,
-        modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1F),
+        modifier = Modifier,
     )
 }
 
