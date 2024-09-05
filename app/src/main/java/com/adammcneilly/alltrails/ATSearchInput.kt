@@ -45,9 +45,9 @@ fun ATSearchInput(modifier: Modifier = Modifier) {
 
     LaunchedEffect(Unit) {
         while (true) {
-            typeIndex = (typeIndex + 1) % typeOptions.size
+            delay(3000)
 
-            delay(2000)
+            typeIndex = (typeIndex + 1) % typeOptions.size
         }
     }
 
