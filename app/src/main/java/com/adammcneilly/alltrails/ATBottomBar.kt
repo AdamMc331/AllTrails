@@ -12,10 +12,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.adammcneilly.alltrails.theme.AllTrailsTheme
 
@@ -79,6 +82,19 @@ private fun RowScope.NavItem(
     label: String,
     selected: Boolean = false,
 ) {
+    val selectedColor = MaterialTheme.colorScheme.onSurface
+    val unselectedColor = selectedColor.copy(
+        alpha = 0.50F,
+    )
+
+    val colorsWithoutIndicator = NavigationBarItemDefaults.colors().copy(
+        selectedIconColor = selectedColor,
+        selectedTextColor = selectedColor,
+        selectedIndicatorColor = Color.Transparent,
+        unselectedIconColor = unselectedColor,
+        unselectedTextColor = unselectedColor,
+    )
+
     NavigationBarItem(
         selected = selected,
         onClick = {},
@@ -92,8 +108,10 @@ private fun RowScope.NavItem(
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelSmall,
+                fontWeight = FontWeight.Bold.takeIf { selected },
             )
         },
+        colors = colorsWithoutIndicator,
     )
 }
 
